@@ -1,0 +1,25 @@
+.body{
+    background-color: #EFC03A; /* Dette er min baggrundsfarve */
+}
+
+.Title{
+    text-align : center;
+}
+
+.tekst{
+    text-align : center;
+}
+
+.list{
+    list-style-position: inside;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.img{
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto; 
+    display: block;
+}
