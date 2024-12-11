@@ -2,7 +2,7 @@
     background-color: #EFC03A; /* Dette er min baggrundsfarve */
 }
 
-.Title{
+.title{
     text-align : center;
 }
 
@@ -14,7 +14,7 @@
     list-style-position: inside;
     padding: 0;
     display: inline-block;
-    text-align: center;
+    
 }
 
 .img{
@@ -22,4 +22,5 @@
     cursor: pointer;
     margin: 0 auto; 
     display: block;
+    align-items: center;
 }
