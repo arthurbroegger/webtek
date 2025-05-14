@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+<body>
+  <h1>Musik quiz</h1>
+  <div class="container">
+    <div class="subContainer">
+      <button type="button" class="button" onclick="question()">Vis tilfældig sang</button>
+    
+      <p id="titel"></p>
+      
+      <input type="text" class="input" id="usersvar">
+      <button type="button" class="button" onclick="svar()">Svar</button>
+      
+      <p id="feedback"></p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <p>Rigtige svar</p>
+      <p id="rigtige"></p>
+    </div>
+  </div>
+  
+  
+</body>
+</html>
+
+<script>
+  let x;
+  let genre;
+  let titel;
+  let artist;
+  let listeMedRigtige = [];
+  let data;
+  var overskrift = null
+  let svarFeedback;
+  let count =0;
+
+
+function question() {
+  var pic;
+  x = Math.floor(Math.random()*347+1);
+  console.log(x);
+  genererTekst(x);
+  document.getElementById('titel').innerHTML = titel;
+}
+
+function svar(){ 
+  usersvar = document.getElementById('usersvar').value;
+  console.log(artist);
+  if (usersvar == artist) {
+        svarFeedback = "korrekt, godt gået!";
+        document.getElementById('feedback').innerHTML = svarFeedback;
+        listeMedRigtige.push(" " + titel);
+        //document.getElementById('rigtige').innerHTML = listeMedRigtige;
+        count++;
+        document.getElementById('rigtige').innerHTML = count;
+      }
+      else {
+        svarFeedback = "forkert, det rigtige svar er " + artist;
+        document.getElementById('feedback').innerHTML = svarFeedback;
+      }
+}
+
+
+function genererTekst(x){
+  for (var i = 0; i < data.length; i++) {
+      if (data[i]["albumId"] == x) {
+        titel = data[i]['album']; 
+        artist = data[i]['artist'];
+        break; // exit efter loop
+      }
+    }
+  return titel;
+  return artist;
+}
+window.onload = function() {
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "quiz.csv", true);
+xhr.responseType = "text";
+xhr.onload = function() {
+  data = Papa.parse(xhr.responseText, {
+    header: true // set this to true if the first row contains the header names
+  }).data;
+};
+xhr.send();
+}
+</script>
+<style>
+  body {
+    background-color: #000000;
+  }
+  p{
+    font-family: 'Arial';
+    color: #ffffff;
+    align-self: center;
+    text-align: center;
+  }
+  h1 {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-size: 100pt;
+    padding: 0px;
+    margin: 0px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0%;
+    margin: 5%;
+  }
+  .subContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: fit-content;
+    background-color: #02b635;
+    border-radius: 50px;
+    padding: 20px;
+  }
+  .button {
+    display: flex;
+    align-self: center;
+    font-family: 'Arial';
+    border-radius: 5px;
+    border: 0px solid #000000;
+    background-color: #14cb48;
+    color: #ffffff;
+    font-size: 20pt;
+  }
+  input {
+    display: flex;
+    align-self: center;
+    font-family: 'Arial';
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0px solid #000000;
+    padding-left: 5px;
+    background-color: #14cb48;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+  rigtige{
+    background-color: #14cb48;
+    font-size: 20pt;
+  }
+</style>
